@@ -3,39 +3,25 @@ const app = express();
 const routes = require('./routes');
 // const dbconnect = require('./dbconnect');
 const utils = require('./utils');
-
-const querystring = require('querystring');
 const {Curl} = require('node-libcurl');
-let port = process.env.PORT || 3000;
+//for reading json from request
+const body_parser = require('body-parser');
+app.use(body_parser.json())
 
-app.use('/api/v1', routes);
+let port = process.env.PORT || 3000;
+// will use this for elasticsearch cient in future
+// app.use('/api/v1', routes);
 app.listen(port, ()=>{
     console.log(`The server is listening on port ${port}...`)
 });
 
-/* sample API */
-app.get('/foo/',(req, res)=>{
-    res.json({
-        'foo':'bar'
-    })
-});
-
 app.post('/register/',(req, res)=>{
-    // registration_data = {
-    //     'first_name':req.body.first_name,
-    //     'last_name':req.body.last_name,
-    //     'password':req.body.password,
-    //     'email':req.body.email,
-    //     'username':req.body.username,
-    //     created_at: utils.current_timestamp,
-    //     updated_at: utils.current_timestamp
-    // }
     registration_data = {
-        'first_name':'Tushar1',
-        'last_name':'Agarwal1',
-        'password':'123456',
-        'email':'tushar.agarwal1@somewhere.com',
-        'username':'tusharagarwal1',
+        'first_name':req.body.first_name,
+        'last_name':req.body.last_name,
+        'password':req.body.password,
+        'email':req.body.email,
+        'username':req.body.username,
         'created_at': utils.current_timestamp(),
         'updated_at': utils.current_timestamp()
     }
