@@ -51,3 +51,8 @@ app.post('/register/',(req, res)=>{
         'message':'OK'
     })
 });
+// NEED MORE APIs
+// CHANGE PASSWORD
+// FORGET PASSWORD
+// LOGIN
+// LOGOUT
