@@ -6,6 +6,7 @@ const utils = require('./utils');
 const {Curl} = require('node-libcurl');
 //for reading json from request
 const body_parser = require('body-parser');
+const { USER_AUTHENTICATION, DOC_ENDPOINT } = require('./config');
 app.use(body_parser.json())
 
 let port = process.env.PORT || 3000;
@@ -27,7 +28,7 @@ app.post('/register/',(req, res)=>{
     }
     const curlTest = new Curl()
     const terminate = curlTest.close.bind(curlTest);
-    curlTest.setOpt(Curl.option.URL,'http://localhost:9200/user-authentication/_doc/');
+    curlTest.setOpt(Curl.option.URL,USER_AUTHENTICATION+DOC_ENDPOINT);
     curlTest.setOpt(Curl.option.HTTPHEADER,['Content-Type: application/json']);
     curlTest.setOpt(Curl.option.POST, true);
     curlTest.setOpt(
